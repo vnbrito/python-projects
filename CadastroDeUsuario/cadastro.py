@@ -1,43 +1,47 @@
 import os
 os.system('cls')
 
-users =[]
-
+users = []
 opcao = 0
 
 print('Bem-Vindo ao Cadastro de usuários:')
 
 def addUser():
-    newUser = input('Digite seu nome: ')
-    users.append(newUser)
+    print('\n --- Cadastro de Novo Usuário --- ')
+    nome = input('Digite seu nome: ')
+    email = input('Digite seu email: ')
+    telefone = input('Digite seu telefone: ')
 
-def addEmail():
-    newEmail = input('Digite seu e-mail: ')
-    users.append(newEmail)
-
-def addTel():
-    newTelephone = input('Digite seu telefone: ')
-    users.append(newTelephone)
+    new_user = [nome, email, telefone]
+    users.append(new_user)
+    print(f'Usuário {nome} cadastrado com sucesso!')
 
 def showUsers():
     print('------ Usuários ------')
+    if not users:
+        print('Nenhum usuário cadastrado!')
+        print('------------------------')
+        return
+    
     userNumber = 1
     for user in users:
-        print(f'{userNumber}. {user}')
+        nome = user[0]
+        email = user[1]
+        telefone = user[2]
+        print(f'{userNumber}. Nome: {nome}, Email: {email}, Telefone: {telefone}')
         userNumber = userNumber + 1
-        print('-----------------------')
+    print('----------------------')
 
 def deleteUsers():
     showUsers()
 
     if not users:
-        print('Nenhum usuário cadastrado!')
         return
     try:
         num = int(input('Digite o número do usuário que quer remover: '))
         index = num - 1
         deletedUsers = users.pop(index)
-        print(f'O usuário {deletedUsers} foi removido com sucesso.')
+        print(f'\nO usuário {deletedUsers[0]} foi removido com sucesso.')
     except:
         print('Erro! Número inválido ou usuário não existe.')
         
@@ -47,14 +51,15 @@ while opcao != '4':
     if opcao == '1':
         addUser()
     elif opcao == '2':
-        addEmail()
+        showUsers()
     elif opcao == '3':
-        addTel()
+        deleteUsers()
     elif opcao == '4':
         print('Saindo do sistema...')
     else:
         print('Opção Inválida! Tente novamente.')
 
     input('\nPressione Enter para continuar...')
+    
     os.system('cls')
             
